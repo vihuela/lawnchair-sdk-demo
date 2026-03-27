@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -77,6 +78,7 @@ class DemoSplashActivity : ComponentActivity() {
 }
 
 @Composable
+@OptIn(ExperimentalMaterial3Api::class)
 private fun DemoSplashScreen(
     onRequestSetDefaultLauncher: () -> Unit,
     onLaunchDesktop: () -> Unit,
@@ -146,6 +148,8 @@ private fun DemoSplashScreen(
                 modifier = Modifier.fillMaxWidth(),
                 color = Color(0xFF7C3AED),
                 trackColor = Color.White.copy(alpha = 0.75f),
+                gapSize = 0.dp,
+                drawStopIndicator = {},
             )
             Text(
                 text = "${(progress.value * 100).roundToInt().coerceIn(0, 100)}%",

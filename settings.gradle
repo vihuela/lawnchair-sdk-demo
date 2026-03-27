@@ -9,6 +9,7 @@ pluginManagement {
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
+        // mavenLocal()
         google()
         mavenCentral()
         maven { url "https://jitpack.io" }
@@ -19,10 +20,8 @@ rootProject.name = "lawnchair_sdk_demo"
 
 include(":app")
 
-// Local source debugging:
-// includeBuild("/Users/rickyyao/github/lawnchair/sdk-local") {
-//     dependencySubstitution {
-//         substitute(module("app.lawnchair:launcher-core")).using(project(":launcher-core"))
-//         substitute(module("app.lawnchair:launcher-sdk-api")).using(project(":launcher-sdk-api"))
-//     }
-// }
+// Local release artifact debugging:
+// Uncomment mavenLocal() above, then publish from /Users/rickyyao/github/lawnchair via:
+// ./gradlew -p /Users/rickyyao/github/lawnchair/sdk-local \
+//   :launcher-sdk-api:publishReleasePublicationToMavenLocal \
+//   :launcher-core:publishReleasePublicationToMavenLocal

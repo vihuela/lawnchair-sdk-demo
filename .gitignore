@@ -4,6 +4,7 @@
 .kotlin/
 build/
 app/build/
+gradle/gradle-daemon-jvm.properties
 local.properties
 captures/
 *.iml

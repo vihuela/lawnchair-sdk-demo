@@ -10,9 +10,15 @@ import app.lawnchair.sdk.api.DesktopItemRowAnchor
 import app.lawnchair.sdk.api.DesktopItemSpec
 import app.lawnchair.sdk.api.LawnchairSdkEntry
 import app.lawnchair.sdk.api.MinusOneContentProvider
+import app.lawnchair.sdk.api.MinusOneOverlayStateListener
 
 class DemoLawnchairSdkEntry : LawnchairSdkEntry {
     override val minusOneContentProvider: MinusOneContentProvider = DemoMinusOneContentProvider()
+    override val openMinusOneOnLauncherLaunch: Boolean = false
+    override val minusOneOverlayStateListener: MinusOneOverlayStateListener =
+        MinusOneOverlayStateListener { state, progress ->
+            DemoMinusOneOverlayMonitor.update(state, progress)
+        }
 
     override val desktopItemProvider: DesktopItemProvider = DemoDesktopItemProvider()
 }

@@ -27,6 +27,8 @@ class DemoMinusOneContentProvider : MinusOneContentProvider {
     @Composable
     override fun Content(modifier: Modifier) {
         val context = LocalContext.current
+        val overlayState = DemoMinusOneOverlayMonitor.state
+        val overlayProgress = DemoMinusOneOverlayMonitor.progress
 
         Column(
             modifier = modifier
@@ -67,6 +69,13 @@ class DemoMinusOneContentProvider : MinusOneContentProvider {
                     Spacer(modifier = Modifier.height(12.dp))
                     Text(
                         text = "点击卡片触发业务 Toast",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = Color.White.copy(alpha = 0.92f),
+                        textAlign = TextAlign.Center,
+                    )
+                    Spacer(modifier = Modifier.height(12.dp))
+                    Text(
+                        text = "负一屏状态: ${overlayState.name} (${String.format("%.2f", overlayProgress)})",
                         style = MaterialTheme.typography.bodyMedium,
                         color = Color.White.copy(alpha = 0.92f),
                         textAlign = TextAlign.Center,
