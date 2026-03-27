@@ -1,0 +1,62 @@
+package com.example.lawnchairsdkdemo
+
+import android.content.Context
+import android.content.Intent
+import app.lawnchair.sdk.LawnchairOperations
+import app.lawnchair.sdk.api.DesktopItemClickAction
+import app.lawnchair.sdk.api.DesktopItemPlacement
+import app.lawnchair.sdk.api.DesktopItemProvider
+import app.lawnchair.sdk.api.DesktopItemRowAnchor
+import app.lawnchair.sdk.api.DesktopItemSpec
+import app.lawnchair.sdk.api.LawnchairSdkEntry
+import app.lawnchair.sdk.api.MinusOneContentProvider
+
+class DemoLawnchairSdkEntry : LawnchairSdkEntry {
+    override val minusOneContentProvider: MinusOneContentProvider = DemoMinusOneContentProvider()
+
+    override val desktopItemProvider: DesktopItemProvider = DemoDesktopItemProvider()
+}
+
+private class DemoDesktopItemProvider : DesktopItemProvider {
+    override fun provideDesktopItems(context: Context): List<DesktopItemSpec> {
+        return listOf(
+            DesktopItemSpec(
+                title = context.getString(R.string.demo_open_minus_one_label),
+                iconResId = R.drawable.ic_demo_open_minus_one,
+                clickAction = DesktopItemClickAction.ProviderAction(ACTION_OPEN_MINUS_ONE),
+                placement = DesktopItemPlacement(
+                    page = 1,
+                    column = 0,
+                    row = DesktopItemRowAnchor.FromBottom(1),
+                ),
+            ),
+            DesktopItemSpec(
+                title = context.getString(R.string.demo_desktop_entry_label),
+                iconResId = R.drawable.ic_demo_desktop_entry,
+                clickAction = DesktopItemClickAction.LaunchIntent(
+                    Intent(context, DemoDesktopEntryActivity::class.java),
+                ),
+                placement = DesktopItemPlacement(
+                    page = 1,
+                    column = 0,
+                    row = DesktopItemRowAnchor.FromBottom(0),
+                ),
+            ),
+        )
+    }
+
+    override fun onDesktopItemAction(
+        context: Context,
+        itemId: String,
+        actionId: String,
+    ): Boolean {
+        if (actionId == ACTION_OPEN_MINUS_ONE) {
+            return LawnchairOperations.openMinusOneAnimated(context)
+        }
+        return false
+    }
+
+    private companion object {
+        const val ACTION_OPEN_MINUS_ONE = "open_minus_one"
+    }
+}

@@ -1,0 +1,28 @@
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven { url "https://jitpack.io" }
+    }
+}
+
+rootProject.name = "lawnchair_sdk_demo"
+
+include(":app")
+
+// Local source debugging:
+// includeBuild("/Users/rickyyao/github/lawnchair/sdk-local") {
+//     dependencySubstitution {
+//         substitute(module("app.lawnchair:launcher-core")).using(project(":launcher-core"))
+//         substitute(module("app.lawnchair:launcher-sdk-api")).using(project(":launcher-sdk-api"))
+//     }
+// }

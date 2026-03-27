@@ -1,0 +1,7 @@
+<resources>
+    <string name="sdk_demo_name">Lawnchair SDK Demo</string>
+    <string name="demo_open_minus_one_label">Open Feed</string>
+    <string name="demo_desktop_entry_label">Demo Entry</string>
+    <string name="demo_desktop_entry_title">Desktop Demo Entry</string>
+    <string name="demo_desktop_entry_message">This page was opened from the workspace demo icon.</string>
+</resources>

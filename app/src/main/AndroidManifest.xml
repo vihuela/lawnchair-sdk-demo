@@ -1,0 +1,68 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <application
+        android:name="com.example.lawnchairsdkdemo.DemoApplication"
+        tools:node="merge"
+        tools:replace="android:name">
+        <!--
+            业务侧 SDK 入口注册。
+            Lawnchair 启动时会读取这条 meta-data，反射创建 DemoLawnchairSdkEntry，
+            然后拿到业务方提供的负一屏等扩展能力。
+        -->
+        <meta-data
+            android:name="app.lawnchair.sdk.entry"
+            android:value="com.example.lawnchairsdkdemo.DemoLawnchairSdkEntry" />
+
+        <activity
+            android:name="com.example.lawnchairsdkdemo.DemoDesktopEntryActivity"
+            android:exported="false"
+            android:theme="@style/DemoEntryTheme" />
+
+        <activity
+            android:name="com.example.lawnchairsdkdemo.DemoSplashActivity"
+            android:exported="true"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!--
+            LawnchairLauncher 原本由 launcher-core 提供。
+            demo 这里重新声明并 replace，只是为了移除它自带的 LAUNCHER 入口，
+            让桌面图标先进入 DemoSplashActivity，再由引导页跳到真正的桌面。
+        -->
+        <activity
+            android:name="app.lawnchair.LawnchairLauncher"
+            android:clearTaskOnLaunch="true"
+            android:configChanges="keyboard|keyboardHidden|mcc|mnc|navigation|orientation|screenSize|screenLayout|smallestScreenSize"
+            android:enabled="true"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:resizeableActivity="true"
+            android:resumeWhilePausing="true"
+            android:screenOrientation="unspecified"
+            android:stateNotNeeded="true"
+            android:taskAffinity=""
+            android:windowSoftInputMode="adjustPan"
+            tools:node="replace">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.SHOW_WORK_APPS" />
+
+                <category android:name="android.intent.category.HOME" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.MONKEY" />
+                <category android:name="android.intent.category.LAUNCHER_APP" />
+            </intent-filter>
+
+            <meta-data
+                android:name="com.android.launcher3.grid.control"
+                android:value="app.lawnchair.demo.grid_control" />
+        </activity>
+    </application>
+
+</manifest>
