@@ -49,8 +49,8 @@
 当前 demo 默认走远程依赖：
 
 ```groovy
-implementation("com.github.vihuela.lawnchair-sdk:launcher-core:v0.1.5")
-implementation("com.github.vihuela.lawnchair-sdk:launcher-sdk-api:v0.1.5")
+implementation("com.github.vihuela.lawnchair-sdk:launcher-core:v0.1.6")
+implementation("com.github.vihuela.lawnchair-sdk:launcher-sdk-api:v0.1.6")
 ```
 
 最新版本请从 JitPack 页面查看：
@@ -81,9 +81,26 @@ class DemoApplication : Application() {
 - 负一屏内容注入：实现 `MinusOneContentProvider`
 - 负一屏状态监听：实现 `MinusOneOverlayStateListener`
 - 桌面 icon 注入：实现 `DesktopItemProvider`
+- 桌面 icon 禁止拖到删除区：给 `DesktopItemSpec` 传入 `allowDragToDelete = false`
 - 打开负一屏动画：`LawnchairOperations.openMinusOneAnimated(context)`
 - 拉起桌面：`LawnchairOperations.launchDesktop(context)`
 - 请求设置默认桌面：`LawnchairOperations.requestSetDefaultLauncher(context)`
+
+桌面 icon 注入示例：
+
+```kotlin
+DesktopItemSpec(
+    title = "Demo Entry",
+    iconResId = R.drawable.ic_demo_desktop_entry,
+    clickAction = DesktopItemClickAction.LaunchIntent(intent),
+    placement = DesktopItemPlacement(
+        page = 1,
+        column = 0,
+        row = DesktopItemRowAnchor.FromBottom(0),
+    ),
+    allowDragToDelete = false,
+)
+```
 
 ### 本地源码联调
 
@@ -150,8 +167,8 @@ The current SDK fork is based on the Lawnchair 15 branch family, starting from t
 This demo uses remote artifacts by default:
 
 ```groovy
-implementation("com.github.vihuela.lawnchair-sdk:launcher-core:v0.1.5")
-implementation("com.github.vihuela.lawnchair-sdk:launcher-sdk-api:v0.1.5")
+implementation("com.github.vihuela.lawnchair-sdk:launcher-core:v0.1.6")
+implementation("com.github.vihuela.lawnchair-sdk:launcher-sdk-api:v0.1.6")
 ```
 
 Check the latest published version on JitPack:
@@ -182,9 +199,26 @@ The host app should provide:
 - Provide minus-one UI: implement `MinusOneContentProvider`
 - Observe minus-one state: implement `MinusOneOverlayStateListener`
 - Inject desktop icons: implement `DesktopItemProvider`
+- Prevent an injected desktop icon from being dragged to the delete area: set `allowDragToDelete = false` on `DesktopItemSpec`
 - Open minus-one with animation: `LawnchairOperations.openMinusOneAnimated(context)`
 - Launch desktop: `LawnchairOperations.launchDesktop(context)`
 - Request default launcher setup: `LawnchairOperations.requestSetDefaultLauncher(context)`
+
+Desktop item example:
+
+```kotlin
+DesktopItemSpec(
+    title = "Demo Entry",
+    iconResId = R.drawable.ic_demo_desktop_entry,
+    clickAction = DesktopItemClickAction.LaunchIntent(intent),
+    placement = DesktopItemPlacement(
+        page = 1,
+        column = 0,
+        row = DesktopItemRowAnchor.FromBottom(0),
+    ),
+    allowDragToDelete = false,
+)
+```
 
 ### Local source debugging
 

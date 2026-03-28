@@ -30,6 +30,7 @@ private class DemoDesktopItemProvider : DesktopItemProvider {
                 title = context.getString(R.string.demo_open_minus_one_label),
                 iconResId = R.drawable.ic_demo_open_minus_one,
                 clickAction = DesktopItemClickAction.ProviderAction(ACTION_OPEN_MINUS_ONE),
+                allowDragToDelete = false,
                 placement = DesktopItemPlacement(
                     page = 1,
                     column = 0,
@@ -42,6 +43,7 @@ private class DemoDesktopItemProvider : DesktopItemProvider {
                 clickAction = DesktopItemClickAction.LaunchIntent(
                     Intent(context, DemoDesktopEntryActivity::class.java),
                 ),
+                allowDragToDelete = false,
                 placement = DesktopItemPlacement(
                     page = 1,
                     column = 0,
@@ -59,6 +61,7 @@ private class DemoDesktopItemProvider : DesktopItemProvider {
                     ),
                 ),
                 id = DESKTOP_ITEM_ID_ENTRY_2,
+                allowDragToDelete = false,
                 placement = DesktopItemPlacement(
                     page = 1,
                     column = 1,
