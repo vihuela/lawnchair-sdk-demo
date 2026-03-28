@@ -186,7 +186,7 @@ The current SDK fork is based on the Lawnchair 15 branch family, starting from t
 
 ### Capability Overview
 
-![Lawnchair SDK Capability Overview](docs/images/lawnchair-sdk-capability-overview.png)
+![Lawnchair SDK Capability Overview (EN)](docs/images/lawnchair-sdk-capability-overview-en.png)
 
 ### Usage
 
