@@ -39,6 +39,10 @@
   - 判断当前是否已设置为默认桌面。
   - 拉起系统默认桌面设置页。
   - 拉起 launcher 应用详情页。
+- 桌面可见回调：
+  - 支持监听桌面完全展示时机。
+  - 支持回调来源：`ColdStart`、`MinusOneReturn`、`AllAppsReturn`、`OtherUiReturn`。
+  - 回调会在桌面确认可见后再延后一拍派发，更适合业务侧做轻量弹框。
 - 宿主 `Application` 兼容：
   - 宿主不需要继承 `app.lawnchair.LawnchairApp`。
   - 只需要在自己的 `Application.onCreate()` 里调用 `LawnchairSdkHost.initialize(this)`。
@@ -50,8 +54,8 @@
 当前 demo 默认走远程依赖：
 
 ```groovy
-implementation("com.github.vihuela.lawnchair-sdk:launcher-core:v0.1.6")
-implementation("com.github.vihuela.lawnchair-sdk:launcher-sdk-api:v0.1.6")
+implementation("com.github.vihuela.lawnchair-sdk:launcher-core:v0.1.7")
+implementation("com.github.vihuela.lawnchair-sdk:launcher-sdk-api:v0.1.7")
 ```
 
 最新版本请从 JitPack 页面查看：
@@ -83,6 +87,7 @@ class DemoApplication : Application() {
 - 负一屏状态监听：实现 `MinusOneOverlayStateListener`
 - 桌面 icon 注入：实现 `DesktopItemProvider`
 - 桌面 icon 禁止拖到删除区：给 `DesktopItemSpec` 传入 `allowDragToDelete = false`
+- 桌面完全展示监听：实现 `DesktopVisibleListener`
 - 打开负一屏动画：`LawnchairOperations.openMinusOneAnimated(context)`
 - 拉起桌面：`LawnchairOperations.launchDesktop(context)`
 - 请求设置默认桌面：`LawnchairOperations.requestSetDefaultLauncher(context)`
@@ -101,6 +106,15 @@ DesktopItemSpec(
     ),
     allowDragToDelete = false,
 )
+```
+
+桌面可见监听示例：
+
+```kotlin
+override val desktopVisibleListener: DesktopVisibleListener =
+    DesktopVisibleListener { source ->
+        Log.d("DemoLawnchairSdk", "Desktop fully visible, source=$source")
+    }
 ```
 
 ### 本地源码联调
@@ -158,6 +172,10 @@ The current SDK fork is based on the Lawnchair 15 branch family, starting from t
   - Check whether the launcher is the current default home app.
   - Open the system default-home settings screen.
   - Open launcher app info.
+- Desktop visible callback:
+  - Host apps can observe when the desktop is fully visible.
+  - Supported sources are `ColdStart`, `MinusOneReturn`, `AllAppsReturn`, and `OtherUiReturn`.
+  - The callback is posted one main-thread turn after visibility is confirmed, which makes it safer for lightweight dialogs.
 - Host `Application` compatibility:
   - The host app does not need to subclass `app.lawnchair.LawnchairApp`.
   - It only needs to call `LawnchairSdkHost.initialize(this)` from its own `Application.onCreate()`.
@@ -169,8 +187,8 @@ The current SDK fork is based on the Lawnchair 15 branch family, starting from t
 This demo uses remote artifacts by default:
 
 ```groovy
-implementation("com.github.vihuela.lawnchair-sdk:launcher-core:v0.1.6")
-implementation("com.github.vihuela.lawnchair-sdk:launcher-sdk-api:v0.1.6")
+implementation("com.github.vihuela.lawnchair-sdk:launcher-core:v0.1.7")
+implementation("com.github.vihuela.lawnchair-sdk:launcher-sdk-api:v0.1.7")
 ```
 
 Check the latest published version on JitPack:
@@ -202,6 +220,7 @@ The host app should provide:
 - Observe minus-one state: implement `MinusOneOverlayStateListener`
 - Inject desktop icons: implement `DesktopItemProvider`
 - Prevent an injected desktop icon from being dragged to the delete area: set `allowDragToDelete = false` on `DesktopItemSpec`
+- Observe full desktop visibility: implement `DesktopVisibleListener`
 - Open minus-one with animation: `LawnchairOperations.openMinusOneAnimated(context)`
 - Launch desktop: `LawnchairOperations.launchDesktop(context)`
 - Request default launcher setup: `LawnchairOperations.requestSetDefaultLauncher(context)`
@@ -220,6 +239,15 @@ DesktopItemSpec(
     ),
     allowDragToDelete = false,
 )
+```
+
+Desktop visible callback example:
+
+```kotlin
+override val desktopVisibleListener: DesktopVisibleListener =
+    DesktopVisibleListener { source ->
+        Log.d("DemoLawnchairSdk", "Desktop fully visible, source=$source")
+    }
 ```
 
 ### Local source debugging

@@ -2,7 +2,9 @@ package com.example.lawnchairsdkdemo
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import app.lawnchair.sdk.LawnchairOperations
+import app.lawnchair.sdk.api.DesktopVisibleListener
 import app.lawnchair.sdk.api.DesktopItemClickAction
 import app.lawnchair.sdk.api.DesktopItemPlacement
 import app.lawnchair.sdk.api.DesktopItemProvider
@@ -19,8 +21,16 @@ class DemoLawnchairSdkEntry : LawnchairSdkEntry {
         MinusOneOverlayStateListener { state, progress ->
             DemoMinusOneOverlayMonitor.update(state, progress)
         }
+    override val desktopVisibleListener: DesktopVisibleListener =
+        DesktopVisibleListener { source ->
+            Log.d(TAG, "Desktop fully visible, source=$source")
+        }
 
     override val desktopItemProvider: DesktopItemProvider = DemoDesktopItemProvider()
+
+    private companion object {
+        const val TAG = "DemoLawnchairSdk"
+    }
 }
 
 private class DemoDesktopItemProvider : DesktopItemProvider {
