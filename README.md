@@ -32,6 +32,7 @@
 - 桌面业务入口能力：
   - 宿主可以向桌面注入自定义 icon。
   - 支持指定页面、列、行锚点。
+  - 支持配置 icon 是否允许拖动到删除区。
   - 支持点击后直接启动 `Intent`，或回调到业务侧自定义 action。
 - 宿主操作能力：
   - 启动桌面。
@@ -150,6 +151,7 @@ The current SDK fork is based on the Lawnchair 15 branch family, starting from t
 - Desktop business entries:
   - Host apps can inject custom workspace icons.
   - Placement supports page, column, and row anchor.
+  - Each injected icon can control whether dragging to the delete area is allowed.
   - Click behavior can either launch an `Intent` directly or dispatch back to host-defined actions.
 - Host operations:
   - Launch desktop.
