@@ -47,6 +47,10 @@
   - 宿主不需要继承 `app.lawnchair.LawnchairApp`。
   - 只需要在自己的 `Application.onCreate()` 里调用 `LawnchairSdkHost.initialize(this)`。
 
+### 开放能力示意图
+
+![Lawnchair SDK Capability Overview](docs/images/lawnchair-sdk-capability-overview.png)
+
 ### 接入方式
 
 #### 1. 添加依赖
@@ -179,6 +183,10 @@ The current SDK fork is based on the Lawnchair 15 branch family, starting from t
 - Host `Application` compatibility:
   - The host app does not need to subclass `app.lawnchair.LawnchairApp`.
   - It only needs to call `LawnchairSdkHost.initialize(this)` from its own `Application.onCreate()`.
+
+### Capability Overview
+
+![Lawnchair SDK Capability Overview](docs/images/lawnchair-sdk-capability-overview.png)
 
 ### Usage
 
