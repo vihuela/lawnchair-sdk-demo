@@ -20,8 +20,20 @@ rootProject.name = "lawnchair_sdk_demo"
 
 include(":app")
 
-// Local release artifact debugging:
-// Uncomment mavenLocal() above, then publish from /Users/rickyyao/github/lawnchair via:
-// ./gradlew -p /Users/rickyyao/github/lawnchair/sdk-local \
-//   :launcher-sdk-api:publishReleasePublicationToMavenLocal \
-//   :launcher-core:publishReleasePublicationToMavenLocal
+def defaultLocalSdkPath = "/Users/rickyyao/github/lawnchair/sdk-local"
+def localSdkPath = providers.gradleProperty("lawnchairSdkLocalPath").orElse(defaultLocalSdkPath).get()
+def useLocalSourceSdk = providers.gradleProperty("useLocalSourceSdk")
+    .map { it.toBoolean() }
+    .orElse(false)
+    .get()
+
+if (useLocalSourceSdk) {
+    includeBuild(localSdkPath) {
+        dependencySubstitution {
+            substitute(module("com.github.vihuela.lawnchair-sdk:launcher-core")).using(project(":launcher-core"))
+            substitute(module("com.github.vihuela.lawnchair-sdk:launcher-sdk-api")).using(project(":launcher-sdk-api"))
+            substitute(module("app.lawnchair:launcher-core")).using(project(":launcher-core"))
+            substitute(module("app.lawnchair:launcher-sdk-api")).using(project(":launcher-sdk-api"))
+        }
+    }
+}

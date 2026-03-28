@@ -1,5 +1,11 @@
 package com.example.lawnchairsdkdemo
 
-import app.lawnchair.LawnchairApp
+import android.app.Application
+import app.lawnchair.sdk.LawnchairSdkHost
 
-class DemoApplication : LawnchairApp()
+class DemoApplication : Application() {
+    override fun onCreate() {
+        super.onCreate()
+        LawnchairSdkHost.initialize(this)
+    }
+}
