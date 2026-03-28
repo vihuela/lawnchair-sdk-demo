@@ -54,11 +54,11 @@
 当前 demo 默认走远程依赖：
 
 ```groovy
-implementation("com.github.vihuela.lawnchair-sdk:launcher-core:v0.1.8")
-implementation("com.github.vihuela.lawnchair-sdk:launcher-sdk-api:v0.1.8")
+implementation("com.github.vihuela.lawnchair-sdk:launcher-core:<latest-version>")
+implementation("com.github.vihuela.lawnchair-sdk:launcher-sdk-api:<latest-version>")
 ```
 
-最新版本请从 JitPack 页面查看：
+将 `<latest-version>` 替换为 JitPack 页面上的最新版本号：
 
 - [https://jitpack.io/#com.github.vihuela/lawnchair-sdk](https://jitpack.io/#com.github.vihuela/lawnchair-sdk)
 
@@ -187,11 +187,11 @@ The current SDK fork is based on the Lawnchair 15 branch family, starting from t
 This demo uses remote artifacts by default:
 
 ```groovy
-implementation("com.github.vihuela.lawnchair-sdk:launcher-core:v0.1.8")
-implementation("com.github.vihuela.lawnchair-sdk:launcher-sdk-api:v0.1.8")
+implementation("com.github.vihuela.lawnchair-sdk:launcher-core:<latest-version>")
+implementation("com.github.vihuela.lawnchair-sdk:launcher-sdk-api:<latest-version>")
 ```
 
-Check the latest published version on JitPack:
+Replace `<latest-version>` with the latest tag published on JitPack:
 
 - [https://jitpack.io/#com.github.vihuela/lawnchair-sdk](https://jitpack.io/#com.github.vihuela/lawnchair-sdk)
 
