@@ -37,7 +37,7 @@ private class DemoDesktopItemProvider : DesktopItemProvider {
                 ),
             ),
             DesktopItemSpec(
-                title = context.getString(R.string.demo_desktop_entry_label),
+                title = context.getString(R.string.demo_desktop_entry_1_label),
                 iconResId = R.drawable.ic_demo_desktop_entry,
                 clickAction = DesktopItemClickAction.LaunchIntent(
                     Intent(context, DemoDesktopEntryActivity::class.java),
@@ -45,6 +45,23 @@ private class DemoDesktopItemProvider : DesktopItemProvider {
                 placement = DesktopItemPlacement(
                     page = 1,
                     column = 0,
+                    row = DesktopItemRowAnchor.FromBottom(0),
+                ),
+            ),
+            DesktopItemSpec(
+                title = context.getString(R.string.demo_desktop_entry_2_label),
+                iconResId = R.drawable.ic_demo_desktop_entry,
+                clickAction = DesktopItemClickAction.LaunchIntent(
+                    DemoDesktopEntryActivity.createIntent(
+                        context = context,
+                        entryTitle = context.getString(R.string.demo_desktop_entry_2_title),
+                        entryMessage = context.getString(R.string.demo_desktop_entry_2_message),
+                    ),
+                ),
+                id = DESKTOP_ITEM_ID_ENTRY_2,
+                placement = DesktopItemPlacement(
+                    page = 1,
+                    column = 1,
                     row = DesktopItemRowAnchor.FromBottom(0),
                 ),
             ),
@@ -64,5 +81,6 @@ private class DemoDesktopItemProvider : DesktopItemProvider {
 
     private companion object {
         const val ACTION_OPEN_MINUS_ONE = "open_minus_one"
+        const val DESKTOP_ITEM_ID_ENTRY_2 = "demo_entry_2"
     }
 }

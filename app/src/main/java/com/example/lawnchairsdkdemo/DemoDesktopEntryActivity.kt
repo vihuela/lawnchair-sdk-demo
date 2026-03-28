@@ -1,5 +1,7 @@
 package com.example.lawnchairsdkdemo
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -21,6 +23,10 @@ import androidx.compose.ui.unit.dp
 class DemoDesktopEntryActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val entryTitle = intent.getStringExtra(EXTRA_ENTRY_TITLE)
+            ?: getString(R.string.demo_desktop_entry_1_title)
+        val entryMessage = intent.getStringExtra(EXTRA_ENTRY_MESSAGE)
+            ?: getString(R.string.demo_desktop_entry_1_message)
         setContent {
             MaterialTheme {
                 Box(
@@ -43,18 +49,34 @@ class DemoDesktopEntryActivity : ComponentActivity() {
                         verticalArrangement = Arrangement.spacedBy(12.dp),
                     ) {
                         Text(
-                            text = getString(R.string.demo_desktop_entry_title),
+                            text = entryTitle,
                             style = MaterialTheme.typography.headlineMedium,
                             fontWeight = FontWeight.Bold,
                             color = Color(0xFF2C1B54),
                         )
                         Text(
-                            text = getString(R.string.demo_desktop_entry_message),
+                            text = entryMessage,
                             style = MaterialTheme.typography.bodyLarge,
                             color = Color(0xFF54427A),
                         )
                     }
                 }
+            }
+        }
+    }
+
+    companion object {
+        private const val EXTRA_ENTRY_TITLE = "entry_title"
+        private const val EXTRA_ENTRY_MESSAGE = "entry_message"
+
+        fun createIntent(
+            context: Context,
+            entryTitle: String,
+            entryMessage: String,
+        ): Intent {
+            return Intent(context, DemoDesktopEntryActivity::class.java).apply {
+                putExtra(EXTRA_ENTRY_TITLE, entryTitle)
+                putExtra(EXTRA_ENTRY_MESSAGE, entryMessage)
             }
         }
     }
