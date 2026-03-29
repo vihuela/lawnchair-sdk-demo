@@ -1,4 +1,4 @@
-# Lawnchair SDK Demo
+# Lawnchair SDK Sample
 
 <div align="right">
   <a href="#readme-zh">中文</a> | <a href="#readme-en">English</a>
@@ -10,7 +10,7 @@
 
 ### 项目说明
 
-这个 demo 用来验证外部宿主接入 `launcher-core` 和 `launcher-sdk-api`。
+这个 sample 工程用来验证外部宿主接入 `launcher-core` 和 `launcher-sdk-api`。
 
 当前 SDK 分支基于 Lawnchair 15 分支族，来源于 upstream `15-dev` / `15-beta` 的共同基线，并在其上做了适合三方宿主 app 集成的 SDK 化改造。
 
@@ -55,7 +55,7 @@
 
 #### 1. 添加依赖
 
-当前 demo 默认走远程依赖：
+当前 sample 默认走远程依赖：
 
 ```groovy
 implementation("com.github.vihuela.lawnchair-sdk:launcher-core:<latest-version>")
@@ -123,7 +123,7 @@ override val desktopVisibleListener: DesktopVisibleListener =
 
 ### 本地源码联调
 
-当前 demo 默认配置：
+当前 sample 默认配置：
 
 ```properties
 useLocalSourceSdk=false
@@ -147,7 +147,7 @@ useLocalSourceSdk=false
 
 ### Overview
 
-This demo shows how a host Android app can integrate `launcher-core` and `launcher-sdk-api`.
+This sample app shows how a host Android app can integrate `launcher-core` and `launcher-sdk-api`.
 
 The current SDK fork is based on the Lawnchair 15 branch family, starting from the shared upstream base of `15-dev` / `15-beta`, and then reshaped into an embeddable SDK for normal host apps.
 
@@ -192,7 +192,7 @@ The current SDK fork is based on the Lawnchair 15 branch family, starting from t
 
 #### 1. Add dependencies
 
-This demo uses remote artifacts by default:
+This sample app uses remote artifacts by default:
 
 ```groovy
 implementation("com.github.vihuela.lawnchair-sdk:launcher-core:<latest-version>")
@@ -260,7 +260,7 @@ override val desktopVisibleListener: DesktopVisibleListener =
 
 ### Local source debugging
 
-The demo currently defaults to:
+The sample app currently defaults to:
 
 ```properties
 useLocalSourceSdk=false
@@ -268,7 +268,7 @@ useLocalSourceSdk=false
 
 That means it uses remote dependencies by default.
 
-If the default local source directory `/Users/rickyyao/github/lawnchair/sdk-local` exists, passing `-PuseLocalSourceSdk=true` will automatically switch the demo to local source integration.
+If the default local source directory `/Users/rickyyao/github/lawnchair/sdk-local` exists, passing `-PuseLocalSourceSdk=true` will automatically switch the sample app to local source integration.
 
 To enable local `includeBuild` source debugging temporarily:
 

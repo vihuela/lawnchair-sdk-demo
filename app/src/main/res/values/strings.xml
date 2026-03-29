@@ -1,5 +1,5 @@
 <resources>
-    <string name="sdk_demo_name">Lawnchair SDK Demo</string>
+    <string name="sdk_demo_name">Lawnchair SDK Sample</string>
     <string name="demo_open_minus_one_label">Open Feed</string>
     <string name="demo_desktop_entry_1_label">Entry 1</string>
     <string name="demo_desktop_entry_1_title">Desktop Demo Entry 1</string>

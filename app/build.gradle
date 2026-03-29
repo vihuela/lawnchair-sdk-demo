@@ -21,12 +21,12 @@ android {
 
     buildTypes {
         debug {
-            resValue "string", "derived_app_name", "Lawnchair SDK Demo"
+            resValue "string", "derived_app_name", "Lawnchair SDK Sample"
         }
 
         release {
             minifyEnabled false
-            resValue "string", "derived_app_name", "Lawnchair SDK Demo"
+            resValue "string", "derived_app_name", "Lawnchair SDK Sample"
         }
     }
 

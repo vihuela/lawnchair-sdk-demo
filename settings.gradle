@@ -16,7 +16,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "lawnchair_sdk_demo"
+rootProject.name = "lawnchair_sdk_sample"
 
 include(":app")
 
