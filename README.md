@@ -34,6 +34,7 @@
   - 支持指定页面、列、行锚点。
   - 支持配置 icon 是否允许拖动到删除区。
   - 支持点击后直接启动 `Intent`，或回调到业务侧自定义 action。
+  - 支持监听 launcher icon 点击，并回调目标包名以及是否为当前宿主包名。
 - 宿主操作能力：
   - 启动桌面。
   - 判断当前是否已设置为默认桌面。
@@ -91,6 +92,7 @@ class DemoApplication : Application() {
 - 负一屏状态监听：实现 `MinusOneOverlayStateListener`
 - 桌面 icon 注入：实现 `DesktopItemProvider`
 - 桌面 icon 禁止拖到删除区：给 `DesktopItemSpec` 传入 `allowDragToDelete = false`
+- 桌面 icon 点击监听：实现 `LauncherIconClickListener`
 - 桌面完全展示监听：实现 `DesktopVisibleListener`
 - 打开负一屏动画：`LawnchairOperations.openMinusOneAnimated(context)`
 - 拉起桌面：`LawnchairOperations.launchDesktop(context)`
@@ -118,6 +120,18 @@ DesktopItemSpec(
 override val desktopVisibleListener: DesktopVisibleListener =
     DesktopVisibleListener { source ->
         Log.d("DemoLawnchairSdk", "Desktop fully visible, source=$source")
+    }
+```
+
+桌面 icon 点击监听示例：
+
+```kotlin
+override val launcherIconClickListener: LauncherIconClickListener =
+    LauncherIconClickListener { context, event ->
+        Log.d(
+            "DemoLawnchairSdk",
+            "Icon clicked: title=${event.title}, targetPackage=${event.targetPackageName}, current=${event.isCurrentPackage}",
+        )
     }
 ```
 
@@ -171,6 +185,7 @@ The current SDK fork is based on the Lawnchair 15 branch family, starting from t
   - Placement supports page, column, and row anchor.
   - Each injected icon can control whether dragging to the delete area is allowed.
   - Click behavior can either launch an `Intent` directly or dispatch back to host-defined actions.
+  - Host apps can also observe launcher icon clicks with the target package name and whether the clicked icon belongs to the current host package.
 - Host operations:
   - Launch desktop.
   - Check whether the launcher is the current default home app.
@@ -228,6 +243,7 @@ The host app should provide:
 - Observe minus-one state: implement `MinusOneOverlayStateListener`
 - Inject desktop icons: implement `DesktopItemProvider`
 - Prevent an injected desktop icon from being dragged to the delete area: set `allowDragToDelete = false` on `DesktopItemSpec`
+- Observe launcher icon clicks: implement `LauncherIconClickListener`
 - Observe full desktop visibility: implement `DesktopVisibleListener`
 - Open minus-one with animation: `LawnchairOperations.openMinusOneAnimated(context)`
 - Launch desktop: `LawnchairOperations.launchDesktop(context)`
@@ -255,6 +271,18 @@ Desktop visible callback example:
 override val desktopVisibleListener: DesktopVisibleListener =
     DesktopVisibleListener { source ->
         Log.d("DemoLawnchairSdk", "Desktop fully visible, source=$source")
+    }
+```
+
+Launcher icon click callback example:
+
+```kotlin
+override val launcherIconClickListener: LauncherIconClickListener =
+    LauncherIconClickListener { context, event ->
+        Log.d(
+            "DemoLawnchairSdk",
+            "Icon clicked: title=${event.title}, targetPackage=${event.targetPackageName}, current=${event.isCurrentPackage}",
+        )
     }
 ```
 

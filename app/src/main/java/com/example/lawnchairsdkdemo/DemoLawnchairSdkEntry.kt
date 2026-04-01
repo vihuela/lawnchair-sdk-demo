@@ -3,6 +3,7 @@ package com.example.lawnchairsdkdemo
 import android.content.Context
 import android.content.Intent
 import android.util.Log
+import android.widget.Toast
 import app.lawnchair.sdk.LawnchairOperations
 import app.lawnchair.sdk.api.DesktopVisibleListener
 import app.lawnchair.sdk.api.DesktopItemClickAction
@@ -10,6 +11,7 @@ import app.lawnchair.sdk.api.DesktopItemPlacement
 import app.lawnchair.sdk.api.DesktopItemProvider
 import app.lawnchair.sdk.api.DesktopItemRowAnchor
 import app.lawnchair.sdk.api.DesktopItemSpec
+import app.lawnchair.sdk.api.LauncherIconClickListener
 import app.lawnchair.sdk.api.LawnchairSdkEntry
 import app.lawnchair.sdk.api.MinusOneContentProvider
 import app.lawnchair.sdk.api.MinusOneOverlayStateListener
@@ -24,6 +26,21 @@ class DemoLawnchairSdkEntry : LawnchairSdkEntry {
     override val desktopVisibleListener: DesktopVisibleListener =
         DesktopVisibleListener { source ->
             Log.d(TAG, "Desktop fully visible, source=$source")
+        }
+    override val launcherIconClickListener: LauncherIconClickListener =
+        LauncherIconClickListener { context, event ->
+            Log.d(
+                TAG,
+                "Launcher icon clicked: title=${event.title}, " +
+                    "targetPackage=${event.targetPackageName}, " +
+                    "isCurrentPackage=${event.isCurrentPackage}, " +
+                    "desktopItemId=${event.desktopItemId}",
+            )
+            Toast.makeText(
+                context,
+                "icon=${event.title.ifBlank { "unknown" }}, current=${event.isCurrentPackage}",
+                Toast.LENGTH_SHORT,
+            ).show()
         }
 
     override val desktopItemProvider: DesktopItemProvider = DemoDesktopItemProvider()
