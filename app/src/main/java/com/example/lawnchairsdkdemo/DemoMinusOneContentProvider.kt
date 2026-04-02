@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -19,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import app.lawnchair.sdk.api.MinusOneContentProvider
@@ -80,6 +83,24 @@ class DemoMinusOneContentProvider : MinusOneContentProvider {
                         color = Color.White.copy(alpha = 0.92f),
                         textAlign = TextAlign.Center,
                     )
+                    Spacer(modifier = Modifier.height(20.dp))
+                    Button(
+                        onClick = {
+                            val removed = DemoDesktopItems.removeEntry1(context)
+                            val message = if (removed) {
+                                "已请求移除 Entry 1"
+                            } else {
+                                "当前 SDK 版本暂不支持移除 Entry 1"
+                            }
+                            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+                        },
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = Color.White,
+                            contentColor = Color(0xFF4C1D95),
+                        ),
+                    ) {
+                        Text(text = stringResource(id = R.string.demo_minus_one_remove_entry_1))
+                    }
                 }
             }
         }

@@ -40,6 +40,7 @@
   - 判断当前是否已设置为默认桌面。
   - 拉起系统默认桌面设置页。
   - 拉起 launcher 应用详情页。
+  - 按 `itemId` 移除已注入的桌面 icon，并阻止后续同步时自动加回。
 - 桌面可见回调：
   - 支持监听桌面完全展示时机。
   - 支持回调来源：`ColdStart`、`MinusOneReturn`、`AllAppsReturn`、`OtherUiReturn`。
@@ -97,6 +98,7 @@ class DemoApplication : Application() {
 - 打开负一屏动画：`LawnchairOperations.openMinusOneAnimated(context)`
 - 拉起桌面：`LawnchairOperations.launchDesktop(context)`
 - 请求设置默认桌面：`LawnchairOperations.requestSetDefaultLauncher(context)`
+- 移除注入的桌面 icon：`LawnchairOperations.removeDesktopItem(context, itemId)`
 
 桌面 icon 注入示例：
 
@@ -133,6 +135,12 @@ override val launcherIconClickListener: LauncherIconClickListener =
             "Icon clicked: title=${event.title}, targetPackage=${event.targetPackageName}, current=${event.isCurrentPackage}",
         )
     }
+```
+
+移除注入桌面 icon 示例：
+
+```kotlin
+val removed = LawnchairOperations.removeDesktopItem(context, "demo_entry_1")
 ```
 
 ### 本地源码联调
@@ -191,6 +199,7 @@ The current SDK fork is based on the Lawnchair 15 branch family, starting from t
   - Check whether the launcher is the current default home app.
   - Open the system default-home settings screen.
   - Open launcher app info.
+  - Remove an injected desktop icon by `itemId` and keep it from being auto-added again during later sync.
 - Desktop visible callback:
   - Host apps can observe when the desktop is fully visible.
   - Supported sources are `ColdStart`, `MinusOneReturn`, `AllAppsReturn`, and `OtherUiReturn`.
@@ -248,6 +257,7 @@ The host app should provide:
 - Open minus-one with animation: `LawnchairOperations.openMinusOneAnimated(context)`
 - Launch desktop: `LawnchairOperations.launchDesktop(context)`
 - Request default launcher setup: `LawnchairOperations.requestSetDefaultLauncher(context)`
+- Remove an injected desktop icon: `LawnchairOperations.removeDesktopItem(context, itemId)`
 
 Desktop item example:
 
@@ -284,6 +294,12 @@ override val launcherIconClickListener: LauncherIconClickListener =
             "Icon clicked: title=${event.title}, targetPackage=${event.targetPackageName}, current=${event.isCurrentPackage}",
         )
     }
+```
+
+Injected desktop icon removal example:
+
+```kotlin
+val removed = LawnchairOperations.removeDesktopItem(context, "demo_entry_1")
 ```
 
 ### Local source debugging

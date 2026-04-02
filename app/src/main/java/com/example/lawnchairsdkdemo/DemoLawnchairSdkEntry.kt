@@ -70,6 +70,7 @@ private class DemoDesktopItemProvider : DesktopItemProvider {
                 clickAction = DesktopItemClickAction.LaunchIntent(
                     Intent(context, DemoDesktopEntryActivity::class.java),
                 ),
+                id = DemoDesktopItems.ENTRY_1_ID,
                 allowDragToDelete = false,
                 placement = DesktopItemPlacement(
                     page = 1,
@@ -87,7 +88,7 @@ private class DemoDesktopItemProvider : DesktopItemProvider {
                         entryMessage = context.getString(R.string.demo_desktop_entry_2_message),
                     ),
                 ),
-                id = DESKTOP_ITEM_ID_ENTRY_2,
+                id = DemoDesktopItems.ENTRY_2_ID,
                 allowDragToDelete = false,
                 placement = DesktopItemPlacement(
                     page = 1,
@@ -111,6 +112,5 @@ private class DemoDesktopItemProvider : DesktopItemProvider {
 
     private companion object {
         const val ACTION_OPEN_MINUS_ONE = "open_minus_one"
-        const val DESKTOP_ITEM_ID_ENTRY_2 = "demo_entry_2"
     }
 }

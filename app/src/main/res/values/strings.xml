@@ -7,4 +7,5 @@
     <string name="demo_desktop_entry_2_label">Entry 2</string>
     <string name="demo_desktop_entry_2_title">Desktop Demo Entry 2</string>
     <string name="demo_desktop_entry_2_message">This page was opened from the second workspace demo icon.</string>
+    <string name="demo_minus_one_remove_entry_1">移除 Entry 1</string>
 </resources>
